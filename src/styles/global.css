@@ -1,0 +1,555 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg-900: #0f1724;
+  --color-bg-800: #071019;
+  --color-card: rgba(255, 255, 255, 0.06);
+  --color-card-border: rgba(255, 255, 255, 0.04);
+  --color-muted: #ddeff2;
+  --color-foreground: #f8fbfd;
+  --accent-1: #06b6d4;
+  --accent-2: #4f46e5;
+  --grad-pill: linear-gradient(
+    90deg,
+    rgba(79, 70, 229, 0.12),
+    rgba(6, 182, 212, 0.08)
+  );
+  --glass-sheen-2: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --shadow-card: 0 10px 30px rgba(2, 6, 23, 0.6);
+  --focus-ring-2: rgba(6, 182, 212, 0.18);
+  --radius-lg-2: 18px;
+  --radius-md-2: 10px;
+  --space-xxl-2: 40px;
+  --space-xl-2: 36px;
+  --space-lg-2: 28px;
+  --space-md-2: 24px;
+  --space-sm-2: 18px;
+
+  --card-width: 920px;
+  --avatar-lg: 220px;
+  --avatar-img: 200px;
+  --fs-h1: 40px;
+  --fs-h2: 16px;
+  --fs-body: 17px;
+  --fs-pill: 14px;
+  --pill-bg: rgba(255, 255, 255, 0.92);
+  --pill-foreground: #071019;
+  /* Tooltip colors: theme-aware so tooltip text remains legible in both themes */
+  /* explicit tooltip palettes so we can swap appearances between themes */
+  --tooltip-bg-dark: rgba(8, 10, 14, 0.92);
+  --tooltip-bg-light: rgba(255, 255, 255, 0.92);
+  --tooltip-text-light: #f8fbfd; /* light text */
+  --tooltip-text-dark: #071019; /* dark text */
+  /* Default (site's dark mode) will use the light-style tooltip (light bg + dark text) */
+  --tooltip-bg: var(--tooltip-bg-light);
+  --tooltip-foreground: var(--tooltip-text-dark);
+  --position-color: #a9d6dd;
+  --theme-transition: 420ms;
+}
+
+/* Base */
+html,
+body {
+  height: 100%;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-900) 0%,
+    var(--color-bg-800) 100%
+  );
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Avatar */
+.avatar {
+  width: var(--avatar-lg);
+  height: var(--avatar-lg);
+  overflow: hidden;
+  border-radius: 50%;
+  display: inline-block;
+}
+.avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+/* Page container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: var(--space-xxl-2) var(--space-md-2);
+  box-sizing: border-box;
+}
+
+@media (max-width: 720px) {
+  .container {
+    padding: var(--space-md-2) 16px;
+  }
+}
+
+/* Card */
+.card-accent {
+  width: 8px;
+  background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+  height: 100%;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: var(--space-xl-2) var(--space-lg-2);
+  color: var(--color-muted);
+}
+.card-content h1 {
+  font-weight: 800;
+  font-size: var(--fs-h1);
+  color: var(--color-foreground);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.6px;
+}
+.card-content h2 {
+  font-weight: 600;
+  font-size: var(--fs-h2);
+  color: var(--position-color);
+  margin: 0 0 12px 0;
+}
+.card-content p {
+  font-size: var(--fs-body);
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin: 0 0 22px 0;
+  max-width: 64ch;
+}
+
+/* Skills */
+.skills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-top: 18px;
+  align-items: center;
+}
+
+/* Socials */
+.card-content .icons {
+  gap: 12px;
+  display: flex;
+}
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  color: var(--color-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  position: relative;
+  transition:
+    transform 200ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 200ms ease,
+    background 200ms ease,
+    color 120ms ease;
+}
+.social-btn svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  stroke-width: 1;
+  fill: none;
+}
+.social-btn i {
+  font-size: 28px;
+  line-height: 1;
+  display: inline-block;
+}
+.social-btn:hover {
+  box-shadow: 0 8px 18px rgba(2, 6, 23, 0.3);
+  color: var(--color-foreground);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.006)
+  );
+  filter: brightness(1.03);
+}
+.social-btn:focus {
+  outline: none;
+}
+.social-btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--focus-ring-2);
+}
+@media (max-width: 520px) {
+  .social-btn {
+    width: 32px;
+    height: 32px;
+  }
+  .social-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .social-btn i {
+    font-size: 20px;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: var(--tooltip-bg);
+  color: var(--tooltip-foreground);
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    transform 180ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+  z-index: 30;
+}
+.social-btn:hover .tooltip,
+.social-btn:focus .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .card-glass {
+    flex-direction: column;
+    width: 100%;
+    max-width: calc(100% - 32px);
+    gap: 14px;
+    padding: 18px;
+  }
+  .avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%; /* keep avatar circular on small screens */
+  }
+  .image {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .card-content {
+    padding: 0;
+  }
+  .card-accent {
+    display: none;
+  }
+  .divider {
+    display: none;
+  }
+  .card-content h1 {
+    font-size: 26px;
+  }
+  .card-content h2 {
+    font-size: 14px;
+  }
+  .card-content p {
+    font-size: 15px;
+  }
+  .card-content .icons {
+    order: 2;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 320px) {
+  .card-content .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+}
+
+/* Tailwind component wrappers for heavy visuals */
+.card-glass {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: var(--card-width);
+  max-width: calc(100% - 48px);
+  background: var(--color-card);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  border-radius: var(--radius-lg-2);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-card-border);
+  transform-origin: center;
+  position: relative;
+  will-change: transform;
+}
+.card-glass:hover {
+  box-shadow: 0 24px 48px rgba(2, 6, 23, 0.75);
+  filter: brightness(1.02);
+}
+.card-glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--glass-sheen-2);
+  mix-blend-mode: overlay;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  background: var(--pill-bg);
+  color: var(--pill-foreground);
+  padding: 7px 14px;
+  font-size: var(--fs-pill);
+  border: 1px solid rgba(2, 6, 23, 0.06);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.08);
+  transition:
+    transform 160ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 160ms ease;
+}
+
+.skill-pill:hover {
+  box-shadow: 0 10px 22px rgba(2, 6, 23, 0.22);
+  filter: brightness(1.02);
+}
+
+@media (max-width: 520px) {
+  .skill-pill {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}
+
+/* Theme toggle base (component-level) */
+.theme-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition:
+    background var(--theme-transition) ease,
+    color var(--theme-transition) ease,
+    box-shadow var(--theme-transition) ease;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+}
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-foreground);
+  box-shadow: 0 10px 28px rgba(2, 6, 23, 0.18);
+  filter: brightness(1.02);
+}
+.theme-toggle svg {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity var(--theme-transition) ease,
+    transform var(--theme-transition) ease;
+}
+
+/* Theme toggle button inside card (more specific overrides) */
+.card-glass .theme-toggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--color-muted);
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(2, 6, 23, 0.18);
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    background var(--theme-transition) ease,
+    color var(--theme-transition) ease,
+    box-shadow var(--theme-transition) ease;
+}
+.card-glass .theme-toggle:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
+  color: var(--color-foreground);
+  box-shadow: 0 10px 28px rgba(2, 6, 23, 0.22);
+  filter: brightness(1.02);
+}
+.card-glass .theme-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+@media (max-width: 520px) {
+  .card-glass .theme-toggle {
+    width: 40px;
+    height: 40px;
+  }
+  .card-glass .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+.card-glass .theme-toggle:focus {
+  outline: none;
+}
+.card-glass .theme-toggle:focus-visible {
+  box-shadow: 0 0 0 4px var(--focus-ring-2);
+}
+
+/* Base icon states (defined before component-scoped overrides) */
+.icon-sun {
+  opacity: 0;
+  transform: rotate(-10deg) scale(0.92);
+  transition:
+    opacity 420ms ease,
+    transform 520ms ease;
+}
+.icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  transition:
+    opacity 420ms ease,
+    transform 520ms ease;
+}
+:root.light .icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+:root.light .icon-moon {
+  opacity: 0;
+  transform: rotate(10deg) scale(0.92);
+}
+
+/* Component-scoped icon overrides appear after base rules to avoid descending specificity */
+.theme-toggle .icon-sun {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+}
+.theme-toggle .icon-moon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+:root.light .theme-toggle .icon-sun {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+:root.light .theme-toggle .icon-moon {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-animated body,
+  html.theme-animated .card-glass,
+  html.theme-animated .card-content h1,
+  html.theme-animated .card-content h2,
+  html.theme-animated .card-content p,
+  html.theme-animated .skill-pill,
+  html.theme-animated .social-btn,
+  html.theme-animated .theme-toggle,
+  .icon-sun,
+  .icon-moon {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Light theme overrides (class toggle or prefers-color-scheme) */
+:root.light {
+  --color-bg-900: #f7fafc;
+  --color-bg-800: #eef2f7;
+  --color-card: rgba(2, 6, 23, 0.04);
+  --color-card-border: rgba(2, 6, 23, 0.06);
+  --color-muted: #24303a;
+  --color-foreground: #071019;
+  --glass-sheen-2: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  --pill-bg: rgba(255, 255, 255, 0.92);
+  --pill-foreground: #071019;
+  /* Swap tooltip appearance: light theme shows the dark-style tooltip (dark bg + light text) */
+  --tooltip-bg: var(--tooltip-bg-dark);
+  --tooltip-foreground: var(--tooltip-text-light);
+  --position-color: #155e63; /* darker teal for legibility in light mode */
+}
+
+/* Ensure tooltip colors are enforced when light theme is active. */
+:root.light .tooltip {
+  background: var(--tooltip-bg) !important;
+  color: var(--tooltip-foreground) !important;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+}
+
+/* Only enable smooth theme transitions after JS initializes to avoid flashes */
+html.theme-animated body,
+html.theme-animated .card-glass,
+html.theme-animated .card-content h1,
+html.theme-animated .card-content h2,
+html.theme-animated .card-content p,
+html.theme-animated .skill-pill,
+html.theme-animated .social-btn,
+html.theme-animated .theme-toggle {
+  transition:
+    color var(--theme-transition) ease,
+    background-color var(--theme-transition) ease,
+    border-color var(--theme-transition) ease,
+    box-shadow var(--theme-transition) ease;
+}
