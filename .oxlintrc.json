@@ -1,0 +1,31 @@
+{
+  // Oxlint configuration (JSONC allowed)
+  // This enables core categories and reasonable severities for a web project
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "pedantic": "off",
+    "perf": "warn",
+    "style": "warn"
+  },
+  "plugins": ["eslint", "typescript", "unicorn", "oxc"],
+  "ignorePatterns": ["node_modules", "public/**", "dist", "pnpm-lock.yaml"],
+  "rules": {
+    "no-console": "warn",
+    "no-ternary": "off",
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{ts,tsx}"],
+      "plugins": ["typescript"],
+      "rules": {
+        "typescript/no-explicit-any": "warn"
+      }
+    },
+    {
+      "files": ["**/*.astro"],
+      "plugins": ["oxc"],
+      "rules": {}
+    }
+  ]
+}

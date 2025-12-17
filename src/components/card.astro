@@ -1,0 +1,44 @@
+---
+// src/components/card.astro
+
+import { Image } from "astro:assets";
+import Skills from "@components/skills.astro";
+import Socials from "@components/socials.astro";
+import ThemeToggle from "@components/theme-toggle.astro";
+
+const {
+  profileImage,
+  name,
+  position,
+  aboutMe,
+  skills,
+  linkedin,
+  github,
+  xcom,
+  email = "",
+} = Astro.props;
+---
+
+<div class="w-full flex items-center justify-center">
+    <div class="card-glass rounded-lg shadow-card" id="profile-card">        
+        <ThemeToggle />
+        <div class="card-accent" aria-hidden="true"></div>
+        <div class="image">
+            <div class="avatar rounded-full">
+                <Image src={profileImage} alt={name} class="w-full h-full object-cover" sizes="(max-width:720px) 160px, 220px" width={220} height={220} priority={true} />
+            </div>
+        </div>
+        <!-- theme island handles initialization and persistence -->
+        <div class="divider" aria-hidden="true"></div>
+        <div class="card-content">
+            <h1 class="text-foreground font-extrabold">{name}</h1>
+            <h2 class="text-muted font-semibold">{position}</h2>
+            <div class="name-divider" aria-hidden="true"></div>
+            <p class="text-muted leading-[1.7]">{aboutMe}</p>
+            <Skills skills={skills} />
+            <Socials linkedin={linkedin} github={github} xcom={xcom} email={email} />
+        </div>
+        
+        
+    </div>
+</div>
