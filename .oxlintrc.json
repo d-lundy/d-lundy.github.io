@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "pedantic": "off",
+    "perf": "warn",
+    "style": "warn"
+  },
+  "plugins": ["eslint", "typescript", "unicorn", "oxc"],
+  "ignorePatterns": ["node_modules", "public/**", "dist", "pnpm-lock.yaml"],
+  "rules": {
+    "no-console": "warn",
+    "no-ternary": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{ts,tsx}"],
+      "plugins": ["typescript"],
+      "rules": {
+        "typescript/no-explicit-any": "warn"
+      }
+    },
+    {
+      "files": ["**/*.astro"],
+      "plugins": ["oxc"],
+      "rules": {}
+    }
+  ]
+}

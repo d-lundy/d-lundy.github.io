@@ -1,5 +1,5 @@
 ---
-// src/components/ThemeToggle.astro
+// src/components/themeToggle.astro
 
 const { ...props } = Astro.props;
 ---
@@ -11,46 +11,61 @@ const { ...props } = Astro.props;
 </button>
 
 <script is:inline type="module">
-(function(){
+(function initThemeToggle(){
   const toggle = document.getElementById('theme-toggle');
-  if(!toggle) return;
+  if (!toggle) { return; }
   const root = document.documentElement;
   const STORAGE_KEY = 'dl_theme';
+  const ANIMATION_DELAY = 80;
 
-  function updateButtonState(isLight){
+  const updateButtonState = (isLight) => {
     toggle.setAttribute('aria-pressed', String(Boolean(isLight)));
-    toggle.title = isLight ? 'Switch to dark theme' : 'Switch to light theme';
-  }
+    if (isLight) {
+      toggle.title = 'Switch to dark theme';
+    } else {
+      toggle.title = 'Switch to light theme';
+    }
+  };
 
-  function applyTheme(pref){
-    if(pref === 'light') root.classList.add('light');
-    else root.classList.remove('light');
+  const applyTheme = (pref) => {
+    root.classList.toggle('light', pref === 'light');
     updateButtonState(pref === 'light');
-  }
+  };
 
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if(stored === 'light' || stored === 'dark') applyTheme(stored);
-    else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
-  } catch (e) {
+    if (stored === 'light' || stored === 'dark') {
+      applyTheme(stored);
+    } else if (globalThis.matchMedia && globalThis.matchMedia('(prefers-color-scheme: light)').matches) {
+      applyTheme('light');
+    }
+  } catch {
     // ignore storage access errors
   }
 
   // enable smooth transitions after initial paint
-  requestAnimationFrame(()=>{
-    setTimeout(()=> root.classList.add('theme-animated'), 80);
+  requestAnimationFrame(() => {
+    setTimeout(() => root.classList.add('theme-animated'), ANIMATION_DELAY);
   });
 
-  function doToggle(){
+  const doToggle = () => {
     const isLight = root.classList.toggle('light');
-    try { localStorage.setItem(STORAGE_KEY, isLight ? 'light' : 'dark'); } catch (e) {}
+    try {
+      if (isLight) {
+        localStorage.setItem(STORAGE_KEY, 'light');
+      } else {
+        localStorage.setItem(STORAGE_KEY, 'dark');
+      }
+    } catch {
+      // ignore storage errors
+    }
     updateButtonState(isLight);
-  }
+  };
 
-  toggle.addEventListener('click', ()=> doToggle());
-  toggle.addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter' || e.key === ' '){
-      e.preventDefault();
+  toggle.addEventListener('click', () => { doToggle(); });
+  toggle.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
       doToggle();
     }
   });

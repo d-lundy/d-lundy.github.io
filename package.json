@@ -1,7 +1,7 @@
 {
   "name": "d-lundy-github-io",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -9,27 +9,29 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "tsc --noEmit",
-    "lint": "ultracite check",
-    "format": "ultracite fix"
+    "lint": "oxlint --type-aware",
+    "lint:fix": "oxlint --type-aware --fix --fix-suggestions",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check ."
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
-    "astro": "^5.16.5",
+    "astro": "^5.16.6",
     "class-variance-authority": "^0.7.1",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.8",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.2",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.23",
-    "husky": "^9.1.7",
+    "oxfmt": "^0.18.0",
+    "oxlint": "^1.33.0",
+    "oxlint-tsgolint": "^0.9.1",
     "postcss": "^8.5.6",
     "postcss-scss": "^4.0.9",
-    "tailwindcss": "^4.1.16",
-    "ultracite": "^6.4.1"
+    "tailwindcss": "^4.1.18"
   }
 }
