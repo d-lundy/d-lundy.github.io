@@ -1,6 +1,5 @@
 {
-  // Oxlint configuration (JSONC allowed)
-  // This enables core categories and reasonable severities for a web project
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
   "categories": {
     "correctness": "error",
     "suspicious": "warn",

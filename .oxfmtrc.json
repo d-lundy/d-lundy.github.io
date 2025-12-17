@@ -1,6 +1,5 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  // Prettier-compatible formatting options
   "printWidth": 100,
   "tabWidth": 2,
   "semi": true,
