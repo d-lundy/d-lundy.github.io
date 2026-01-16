@@ -2,15 +2,11 @@
 
 Astro personal site — quick start and structure
 
-Quick start
+````
+
+Install Bun from https://bun.sh and then run:
 
 ```bash
-pnpm install
-pnpm run dev
-```
-
-Build
-
-```bash
-pnpm run build
-```
+bun install
+bun run dev
+````
