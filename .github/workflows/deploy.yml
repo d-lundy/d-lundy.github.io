@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install and build with Astro
-        uses: withastro/action@v4
+        uses: withastro/action@v5
         with:
-          package-manager: pnpm@latest
-          build-cmd: pnpm run build
+          package-manager: bun@latest
+          build-cmd: bun run build
 
   deploy:
     name: Deploy

@@ -1,20 +1,39 @@
 ---
 // src/pages/index.astro
 
-import BaseLayout from "@layouts/base-layout.astro";
+import "@styles/global.css";
+import BaseLayout from "@components/base-layout.svelte";
 import Card from "@components/card.astro";
+
 ---
 
-<BaseLayout title="d-lundy-github-io" description="Daniel Lundy's GitHub Page Portfolio">
-	<Card
-	  profileImage="/images/profile.png"
-	  name="Daniel Lundy"
-	  position="CTO @ Scrap Dragon Software | Software Engineer"
-	  aboutMe={`Chief Technology Officer at Scrap Dragon Software with experience building scalable software solutions`}
-	  skills={["C#", ".NET", "Azure", "Docker", "JavaScript", "TypeScript", "Next.js"]}
-	  linkedin="https://www.linkedin.com/in/daniel-lundy-7267a279/"
-	  github="https://github.com/d-lundy"
-	  xcom="https://x.com/dlundy_dev"
-	  email="mailto:daniel.lundy@scrapdragon.com"
-	/>
-</BaseLayout>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Daniel Lundy's GitHub Page Portfolio" />
+		<!-- FAVICON-->
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<!-- GOOGLE FONTS -->
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
+		<!-- CDN ICON BOOTSTRAP 5 -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
+		<title>d-lundy-github-io</title>
+	</head>
+	<body class="text-muted">
+		<BaseLayout title="d-lundy-github-io" description="Daniel Lundy's GitHub Page Portfolio">
+			<Card
+				profileImage="/images/profile.png"
+				name="Daniel Lundy"
+				position="CTO @ Scrap Dragon Software | Software Engineer"
+				aboutMe={`Chief Technology Officer at Scrap Dragon Software with experience building scalable software solutions`}
+				skills={["C#", ".NET", "Azure", "Docker", "JavaScript", "TypeScript", "Next.js"]}
+				linkedin="https://www.linkedin.com/in/daniel-lundy-7267a279/"
+				github="https://github.com/d-lundy"
+				xcom="https://x.com/dlundy_dev"
+				email="mailto:daniel.lundy@scrapdragon.com"
+			/>
+		</BaseLayout>
+	</body>
+</html>
