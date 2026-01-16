@@ -1,7 +1,7 @@
 <script>
-  import ThemeToggle from '@/components/theme-toggle.svelte';
-  import Skills from '@/components/skills.svelte';
-  import Socials from '@/components/socials.svelte';
+  import ThemeToggle from '@components/theme-toggle.svelte';
+  import Skills from '@components/skills.svelte';
+  import Socials from '@components/socials.svelte';
 
   export let profileImage = '';
   export let name = '';
